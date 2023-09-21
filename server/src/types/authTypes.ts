@@ -1,3 +1,10 @@
+interface OAuthUser {
+  id: string | number;
+  email: string;
+  name: string;
+}
+
+// Start Github
 interface GithubResponse {
   access_token: string;
   scope: string;
@@ -11,8 +18,11 @@ type GithubEmails = Array<{
   visibility: string;
 }>;
 
-interface OAuthUser {
-  id: string | number;
-  email: string;
-  name: string;
+// Start Google
+interface GoogleTokenEndpointResponse {
+  access_token: string;
+  scope: string;
+  token_type: string;
+  expires_in: number;
+  id_token: string;
 }
