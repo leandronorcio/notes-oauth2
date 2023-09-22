@@ -3,7 +3,7 @@ import {
   getGithubAccessToken,
   getGithubUser,
 } from '../../services/auth/github';
-import { generateCsrfToken } from '../../utils/generateCsrfToken';
+import { generateCsrfToken } from '../../utils/generateToken';
 
 // Github's OAuth 2.0 docs: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
 export const githubAuth: RequestHandler = (req, res) => {

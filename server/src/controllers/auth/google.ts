@@ -1,11 +1,12 @@
 import { RequestHandler } from 'express';
-import { generateCsrfToken } from '../../utils/generateCsrfToken';
+import { generateCsrfToken } from '../../utils/generateToken';
 import { getGoogleAccessAndIdToken } from '../../services/auth/google';
 
 /**
- * Google has support for OpenID Connect so we can directly authenticate the
- * users to our app without needing to call their usef info endpoint because the
- * user info will be included in the response when we call their token endpoint.
+ * Google supports OpenID Connect, this means we won't need to call
+ * their user's info endpoint as an `id_token` that contains the user info
+ * will be included in the response when we exchange the authorization code
+ * for an access token.
  *
  * Docs: https://developers.google.com/identity/openid-connect/openid-connect
  */
