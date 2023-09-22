@@ -3,6 +3,7 @@ export interface OAuthUser {
   name: string;
   // OAuth 2.0 providers do not always return an email
   email?: string | null;
+  avatar?: string | null;
 }
 
 // Start Github
