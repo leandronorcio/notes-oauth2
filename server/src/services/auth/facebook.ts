@@ -7,7 +7,8 @@ import { parseJwtPayload } from '../../utils/parseJwtPayload';
 // Exchange the authorization code for an access and an id token
 export async function getFacebookAccessAndIdToken(
   code: string,
-  codeVerifier: string
+  codeVerifier: string,
+  sessionNonce: string
 ) {
   const tokenEndpoint = new URL(
     'https://graph.facebook.com/v11.0/oauth/access_token'
@@ -27,7 +28,11 @@ export async function getFacebookAccessAndIdToken(
 
   // `clone()` prevents the 'Body is unusable error': https://stackoverflow.com/a/54115314/8434369
   const data = (await res.clone().json()) as FacebookTokenEndpointResponse;
-  const { sub, name, email, picture } = parseJwtPayload(data.id_token);
+  const { sub, name, email, picture, nonce } = parseJwtPayload(data.id_token);
+
+  // To validate the token, check if the `nonce` claim of the `id_token`
+  // matches the `nonce` that we set in the authorization request.
+  if (sessionNonce !== nonce) throw Error('Nonce claim is not valid.');
 
   return {
     id: sub,

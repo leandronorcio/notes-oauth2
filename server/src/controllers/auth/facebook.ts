@@ -26,7 +26,7 @@ export const facebookbAuth: RequestHandler = (req, res) => {
   const { codeVerifier, codeChallenge } = generatePkceTokens();
   req.session.codeVerifier = codeVerifier;
 
-  // And a`nonce` value for verifying the `id_token`
+  // And a`nonce` value for verifying the `id_token` later
   const nonce = generateRandomToken(8);
   req.session.nonce = nonce;
 
@@ -55,7 +55,8 @@ export const facebookbAuthCallback: RequestHandler = async (req, res) => {
   try {
     const user = await getFacebookAccessAndIdToken(
       req.query.code as string,
-      req.session.codeVerifier as string
+      req.session.codeVerifier as string,
+      req.session.nonce as string
     );
 
     res.send(user);
