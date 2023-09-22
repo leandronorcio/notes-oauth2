@@ -27,11 +27,12 @@ export async function getFacebookAccessAndIdToken(
 
   // `clone()` prevents the 'Body is unusable error': https://stackoverflow.com/a/54115314/8434369
   const data = (await res.clone().json()) as FacebookTokenEndpointResponse;
-  const payload = parseJwtPayload(data.id_token);
+  const { sub, name, email, picture } = parseJwtPayload(data.id_token);
 
   return {
-    id: payload.sub,
-    name: payload.name,
-    email: payload.email || null,
+    id: sub,
+    name: name,
+    email: email || null,
+    avatar: picture,
   } as OAuthUser;
 }

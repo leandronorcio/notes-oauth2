@@ -56,5 +56,6 @@ export async function getGithubUser(accessToken: string) {
     id,
     name,
     email: primaryEmail[0].email || null,
+    avatar: avatar_url,
   } as OAuthUser;
 }

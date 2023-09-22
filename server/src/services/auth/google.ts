@@ -28,11 +28,14 @@ export async function getGoogleAccessAndIdToken(code: string) {
 
   if (!res.ok) throw Error('Error getting an access and an ID token.');
   const data = (await res.json()) as GoogleTokenEndpointResponse;
-  const payload = parseJwtPayload(data.id_token);
+  const { sub, email, email_verified, name, picture } = parseJwtPayload(
+    data.id_token
+  );
 
   return {
-    id: payload.sub,
-    email: payload.email,
-    name: payload.name,
+    id: sub,
+    email: email_verified ? email : null,
+    name: name,
+    avatar: picture,
   } as OAuthUser;
 }
