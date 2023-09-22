@@ -1,4 +1,4 @@
-interface OAuthUser {
+export interface OAuthUser {
   id: string | number;
   name: string;
   // OAuth 2.0 providers do not always return an email
@@ -6,13 +6,13 @@ interface OAuthUser {
 }
 
 // Start Github
-interface GithubResponse {
+export interface GithubResponse {
   access_token: string;
   scope: string;
   token_type: string;
 }
 
-type GithubEmails = Array<{
+export type GithubEmails = Array<{
   email: string;
   verified: boolean;
   primary: boolean;
@@ -20,7 +20,7 @@ type GithubEmails = Array<{
 }>;
 
 // Start Google
-interface GoogleTokenEndpointResponse {
+export interface GoogleTokenEndpointResponse {
   access_token: string;
   scope: string;
   token_type: string;
@@ -29,7 +29,7 @@ interface GoogleTokenEndpointResponse {
 }
 
 // Start Facebook
-interface FacebookTokenEndpointResponse {
+export interface FacebookTokenEndpointResponse {
   access_token: string;
   token_type: string;
   expires_in: number;

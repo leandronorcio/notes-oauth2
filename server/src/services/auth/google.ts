@@ -1,3 +1,4 @@
+import { GoogleTokenEndpointResponse, OAuthUser } from '../../types/authTypes';
 import { parseJwtPayload } from '../../utils/parseJwtPayload';
 
 /**

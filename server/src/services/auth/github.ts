@@ -1,3 +1,5 @@
+import { GithubEmails, GithubResponse, OAuthUser } from '../../types/authTypes';
+
 /**
  * Exchange a Github authorization code for an access token.
  * @param code - string
@@ -48,7 +50,8 @@ export async function getGithubUser(accessToken: string) {
     ({ verified, primary }) => verified && primary
   );
 
-  const { id, name } = await user.json();
+  const { id, name, avatar_url } = await user.json();
+
   return {
     id,
     name,

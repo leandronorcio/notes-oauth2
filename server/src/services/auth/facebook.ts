@@ -1,3 +1,7 @@
+import {
+  FacebookTokenEndpointResponse,
+  OAuthUser,
+} from '../../types/authTypes';
 import { parseJwtPayload } from '../../utils/parseJwtPayload';
 
 // Exchange the authorization code for an access and an id token
