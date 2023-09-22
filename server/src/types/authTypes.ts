@@ -1,7 +1,8 @@
 interface OAuthUser {
   id: string | number;
-  email: string;
   name: string;
+  // OAuth 2.0 providers do not always return an email
+  email?: string | null;
 }
 
 // Start Github
@@ -22,6 +23,14 @@ type GithubEmails = Array<{
 interface GoogleTokenEndpointResponse {
   access_token: string;
   scope: string;
+  token_type: string;
+  expires_in: number;
+  id_token: string;
+}
+
+// Start Facebook
+interface FacebookTokenEndpointResponse {
+  access_token: string;
   token_type: string;
   expires_in: number;
   id_token: string;
