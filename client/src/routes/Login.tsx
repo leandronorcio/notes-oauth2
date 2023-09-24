@@ -1,7 +1,9 @@
+import { LoginForm } from '@/components/LoginForm';
+
 export function Login() {
   return (
-    <div className="bg-background">
-      <h1>Login</h1>
+    <div className="container flex items-center justify-center h-screen">
+      <LoginForm />
     </div>
   );
 }

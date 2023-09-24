@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Login } from './routes/Login';
+import { Register } from './routes/Register';
 
 const Paths = {
   root: '/',
@@ -31,5 +32,6 @@ export const router = createBrowserRouter([
   },
   {
     path: Paths.register,
+    element: <Register />,
   },
 ]);
