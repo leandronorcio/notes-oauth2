@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './globals.css';
-import { Button } from './components/ui/button';
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <div>Sanity</div>
-    <Button>Action</Button>
+    <App />
   </React.StrictMode>
 );
