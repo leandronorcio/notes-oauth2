@@ -24,11 +24,11 @@ export function LoginForm({
       {...props}
     >
       <h1 className="text-2xl font-semibold tracking-tight">
-        {type === 'login' ? 'Login to Notes' : 'Create an account'}
+        {type === 'login' ? 'Log In to Notes' : 'Create an account'}
       </h1>
       <p className="text-sm text-muted-foreground mb-4">
-        {type === 'login' ? 'Login' : 'Create an account'} using your social
-        media accounts
+        {type === 'login' ? 'Sign in' : 'Register'} using your social media
+        accounts
       </p>
       <div className="relative mb-4">
         <div className="absolute inset-0 flex items-center">
