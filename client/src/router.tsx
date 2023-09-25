@@ -1,12 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Login } from './routes/Login';
 import { Register } from './routes/Register';
+import { Notes } from './routes/Notes';
 
 const Paths = {
   root: '/',
-  noteDetail: '/note/:noteId',
-  noteEdit: '/note/:noteId/edit',
-  noteDelete: '/note/:noteId/delete',
+  notes: '/notes',
+  noteDetail: '/notes/:noteId',
+  noteEdit: '/notes/:noteId/edit',
+  noteDelete: '/notes/:noteId/delete',
   login: '/login',
   register: '/register',
 };
@@ -14,6 +16,10 @@ const Paths = {
 export const router = createBrowserRouter([
   {
     path: Paths.root,
+  },
+  {
+    path: Paths.notes,
+    element: <Notes />,
     children: [
       {
         path: Paths.noteDetail,

@@ -12,6 +12,7 @@ export default defineConfig({
         families: [
           {
             name: 'Inter',
+            styles: 'wght@400;700',
           },
         ],
       },
