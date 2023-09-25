@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Login } from './routes/Login';
 import { Register } from './routes/Register';
 import { Notes } from './routes/Notes';
+import { NoteDetail } from './routes/NoteDetail';
 
 const Paths = {
   root: '/',
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: Paths.noteDetail,
+        element: <NoteDetail />,
       },
       {
         path: Paths.noteEdit,

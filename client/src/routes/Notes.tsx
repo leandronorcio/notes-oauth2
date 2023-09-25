@@ -1,10 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FilePlus } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { FilePlus, Menu, X } from 'lucide-react';
+import { NavLink, Outlet } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ModeToggle } from '@/components/ui/mode-toggle';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 export function Notes() {
+  // This state is only used for screens smaller than `sm`
+  const [sidebarShown, setSidebarShown] = useState(false);
+  const toggleSidebar = () => setSidebarShown((prev) => !prev);
   const notes = [
     {
       id: 1,
@@ -21,127 +27,69 @@ export function Notes() {
       title: 'Hello World',
       content: 'Lorem ipsum dolor sit amet',
     },
-    {
-      id: 4,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 1,
-      title: 'Hello World Hello WorldHello WorldHello WorldHello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 2,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 3,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 4,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 1,
-      title: 'Hello World Hello WorldHello WorldHello WorldHello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 2,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 3,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 4,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 1,
-      title: 'Hello World Hello WorldHello WorldHello WorldHello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 2,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 3,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 4,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 1,
-      title: 'Hello World Hello WorldHello WorldHello WorldHello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 2,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 3,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
-    {
-      id: 4,
-      title: 'Hello World',
-      content: 'Lorem ipsum dolor sit amet',
-    },
   ];
   return (
-    <div className="flex h-screen">
-      <div className="w-full flex flex-col sm:w-[300px] border-r-border border-r-[1px]">
-        <div className="p-2 w-full">
-          <Button className="flex gap-2 w-full">
-            <FilePlus /> Create note
+    <div className="h-screen flex flex-col">
+      <nav className="px-3 py-2 flex justify-between">
+        <div className="flex items-center gap-4">
+          {/* Only show this button screens smaller than `sm`. */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleSidebar}
+            className="sm:hidden"
+          >
+            {sidebarShown ? <X /> : <Menu />}
           </Button>
+          <h1 className="text-xl font-semibold p-0 m-0">Notes</h1>
         </div>
-        <Separator />
-        <div className="flex-1 py-2 overflow-y-auto px-2">
-          <h1 className="text-2xl font-bold pb-2">Notes</h1>
-          <ul className="flex flex-col gap-2">
-            {notes.map(({ id, title }) => {
-              return (
-                <li key={id}>
-                  <NavLink
-                    to={`${id}`}
-                    className="block rounded-lg py-2 px-4 bg-muted cursor-pointer hover:bg-primary truncate"
-                  >
-                    {title}
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div>
-          <Separator />
-          <div className="p-3 flex gap-4 items-center">
-            <Avatar>
-              <AvatarImage src="https://avatars.githubusercontent.com/u/32889996?s=400&v=4" />
-              <AvatarFallback>LN</AvatarFallback>
-            </Avatar>
-            <h3 className="text-lg font-semibold">Leandro Norcio</h3>
+        <ModeToggle />
+      </nav>
+      <Separator />
+
+      <div className="relative flex-1">
+        <div
+          className={cn(
+            'absolute h-full transition-[left] duration-500 w-full sm:w-[300px] flex flex-col border-r-border border-r-[1px] bg-background',
+            sidebarShown ? 'left-0' : '-left-full',
+            'sm:left-0'
+          )}
+        >
+          <div className="p-2 w-full">
+            <Button className="flex gap-2 w-full">
+              <FilePlus /> Create note
+            </Button>
           </div>
+          <Separator />
+          <div className="flex-1 py-2 overflow-y-auto px-2">
+            <ul className="flex flex-col gap-2">
+              {notes.map(({ id, title }) => {
+                return (
+                  <li key={id}>
+                    <NavLink
+                      to={`${id}`}
+                      className="block rounded-lg py-2 px-4 border-border hover:bg-accent border-[1px] cursor-pointer truncate"
+                    >
+                      {title}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div>
+            <Separator />
+            <div className="p-3 flex gap-4 items-center">
+              <Avatar>
+                <AvatarImage src="https://avatars.githubusercontent.com/u/32889996?s=400&v=4" />
+                <AvatarFallback>LN</AvatarFallback>
+              </Avatar>
+              <h3 className="text-lg font-semibold">Leandro Norcio</h3>
+            </div>
+          </div>
+        </div>
+        <div className="h-full flex-1 sm:ml-[300px]">
+          <Outlet />
         </div>
       </div>
     </div>
