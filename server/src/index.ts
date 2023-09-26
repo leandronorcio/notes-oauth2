@@ -1,10 +1,12 @@
 import express from 'express';
 import session from 'express-session';
 import { authRouter } from './routes/authRouter';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_SECRET as string,
