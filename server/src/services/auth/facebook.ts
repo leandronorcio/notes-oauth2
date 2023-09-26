@@ -17,7 +17,7 @@ export async function getFacebookAccessAndIdToken(
   // We'll send a GET request to Facebook's token endpoint to get the user's access and id token
   const params: Record<string, string> = {
     client_id: process.env.FACEBOOK_CLIENT_ID as string,
-    redirect_uri: 'http://localhost:4000/auth/facebook/callback',
+    redirect_uri: process.env.FACEBOOK_REDIRECT_URI as string,
     code_verifier: codeVerifier,
     code,
   };

@@ -11,7 +11,7 @@ export async function getGithubAccessToken(code: string) {
     client_id: process.env.GITHUB_CLIENT_ID,
     client_secret: process.env.GITHUB_CLIENT_SECRET,
     code,
-    redirect_uri: 'http://localhost:4000/auth/github/callback',
+    redirect_uri: process.env.GITHUB_REDIRECT_URI as string,
   };
 
   const res = await fetch(tokenEndpoint, {

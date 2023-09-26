@@ -14,7 +14,7 @@ export async function getGoogleAccessAndIdToken(code: string) {
     client_id: process.env.GOOGLE_CLIENT_ID,
     client_secret: process.env.GOOGLE_CLIENT_SECRET,
     code,
-    redirect_uri: 'http://localhost:4000/auth/google/callback',
+    redirect_uri: process.env.GOOGLE_REDIRECT_URI as string,
   };
 
   const res = await fetch(tokenEndpoint, {

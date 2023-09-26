@@ -25,7 +25,7 @@ export const googleAuth: RequestHandler = (req, res) => {
     // If `id_token` is in the scope, the ID token will be sent via the URL query params, we want to avoid that
     response_type: 'code',
     scope: 'openid email profile',
-    redirect_uri: 'http://localhost:4000/auth/google/callback',
+    redirect_uri: process.env.GOOGLE_REDIRECT_URI as string,
     state: csrfToken,
   };
   for (const key in params) authEndpoint.searchParams.set(key, params[key]);

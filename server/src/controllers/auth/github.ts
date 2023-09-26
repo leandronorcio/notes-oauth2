@@ -17,7 +17,7 @@ export const githubAuth: RequestHandler = (req, res) => {
   // Build the URL parameters
   const params: Record<string, string> = {
     client_id: process.env.GITHUB_CLIENT_ID as string,
-    redirect_uri: 'http://localhost:4000/auth/github/callback',
+    redirect_uri: process.env.GITHUB_REDIRECT_URI as string,
     scope: 'read:user user:email',
     state: csrfToken,
   };

@@ -37,7 +37,7 @@ export const facebookbAuth: RequestHandler = (req, res) => {
     // If `id_token` is in the scope, the ID token will be sent via the URL query params, we want to avoid that
     scope: 'openid email public_profile',
     response_type: 'code',
-    redirect_uri: 'http://localhost:4000/auth/facebook/callback',
+    redirect_uri: process.env.FACEBOOK_REDIRECT_URI as string,
     state: csrfToken,
     code_challenge: codeChallenge,
     code_challenge_method: 'S256',
