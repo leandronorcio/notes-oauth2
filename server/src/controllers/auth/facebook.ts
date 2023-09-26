@@ -4,7 +4,6 @@ import {
   generatePkceTokens,
   generateRandomToken,
 } from '../../utils/generateToken';
-import { getFacebookAccessAndIdToken } from '../../services/auth/facebook';
 
 /**
  * Facebook supports OpenID Connect, this means we won't need to call
@@ -46,22 +45,4 @@ export const facebookbAuth: RequestHandler = (req, res) => {
   for (const key in params) authEndpoint.searchParams.set(key, params[key]);
 
   res.redirect(authEndpoint.toString());
-};
-
-export const facebookbAuthCallback: RequestHandler = async (req, res) => {
-  // Facebook will send us the `code` and `state` query params upon successful authorization
-  // The `verifyCsrfToken()` middleware verifies if the `state` is valid
-
-  try {
-    const user = await getFacebookAccessAndIdToken(
-      req.query.code as string,
-      req.session.codeVerifier as string,
-      req.session.nonce as string
-    );
-
-    res.send(user);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
 };

@@ -1,6 +1,5 @@
 import { RequestHandler } from 'express';
 import { generateCsrfToken } from '../../utils/generateToken';
-import { getGoogleAccessAndIdToken } from '../../services/auth/google';
 
 /**
  * Google supports OpenID Connect, this means we won't need to call
@@ -31,15 +30,4 @@ export const googleAuth: RequestHandler = (req, res) => {
   for (const key in params) authEndpoint.searchParams.set(key, params[key]);
 
   res.redirect(authEndpoint.toString());
-};
-
-export const googleAuthCallback: RequestHandler = async (req, res) => {
-  // Github will send us the `code` and `state` query params upon successful authorization
-  // The `verifyCsrfToken()` middleware verifies if the `state` is valid
-  try {
-    const user = await getGoogleAccessAndIdToken(req.query.code as string);
-    res.send(user);
-  } catch (error) {
-    res.sendStatus(500);
-  }
 };
