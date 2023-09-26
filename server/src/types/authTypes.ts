@@ -1,4 +1,7 @@
 export type OAuthProviders = 'GITHUB' | 'GOOGLE' | 'FACEBOOK';
+
+// The user info returned by OAuth providers differ in property names,
+// they must be manually converted into this type for consistency
 export interface OAuthUser {
   id: string | number;
   name: string;
