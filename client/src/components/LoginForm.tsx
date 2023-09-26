@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
-import { useState } from 'react';
 import { Facebook, Github, Google } from './ui/svg-icons';
 import { Link } from 'react-router-dom';
 
@@ -13,8 +12,6 @@ export function LoginForm({
   type = 'login',
   ...props
 }: LoginFormProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
     <div
       className={cn(
@@ -43,7 +40,7 @@ export function LoginForm({
       <Button
         variant="outline"
         type="button"
-        disabled={isLoading}
+        // disabled={isLoading}
         className="flex gap-2"
       >
         <Github />
@@ -52,7 +49,7 @@ export function LoginForm({
       <Button
         variant="outline"
         type="button"
-        disabled={isLoading}
+        // disabled={isLoading}
         className="flex gap-2"
       >
         <Facebook /> Facebook
@@ -60,7 +57,7 @@ export function LoginForm({
       <Button
         variant="outline"
         type="button"
-        disabled={isLoading}
+        // disabled={isLoading}
         className="flex gap-2"
       >
         <Google /> Google
