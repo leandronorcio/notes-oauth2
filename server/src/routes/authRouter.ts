@@ -16,7 +16,7 @@ router.get('/google', googleAuth);
 router.get('/google/callback', verifyCsrfToken, oAuthCallback, login);
 router.get('/facebook', facebookbAuth);
 router.get('/facebook/callback', verifyCsrfToken, oAuthCallback, login);
-router.get('/refresh', refresh);
+router.post('/refresh', refresh);
 router.get('/refresh/logout', logout);
 
 export { router as authRouter };

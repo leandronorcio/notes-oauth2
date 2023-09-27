@@ -30,7 +30,8 @@ export const login: RequestHandler = async (req, res) => {
     userId = account.userId;
   }
 
-  // Login the user into our app
+  // Login the user into our app by setting an HttpOnly cookie `refreshToken`,
+  // which shall be used for issuing access tokens to the user.
   const refreshToken = jwt.sign(
     { sub: userId, name },
     process.env.JWT_SECRET as string,
