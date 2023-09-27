@@ -2,10 +2,10 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { FilePlus, Menu, X } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { ProfileBar } from '@/components/ProfileBar';
 
 export function Notes() {
   // This state is only used for screens smaller than `sm`
@@ -77,15 +77,9 @@ export function Notes() {
               })}
             </ul>
           </div>
-          <div>
-            <Separator />
-            <div className="p-3 flex gap-4 items-center">
-              <Avatar>
-                <AvatarImage src="https://avatars.githubusercontent.com/u/32889996?s=400&v=4" />
-                <AvatarFallback>LN</AvatarFallback>
-              </Avatar>
-              <h3 className="text-lg font-semibold">Leandro Norcio</h3>
-            </div>
+          <Separator />
+          <div className="p-1">
+            <ProfileBar />
           </div>
         </div>
         <div className="h-full flex-1 sm:ml-[300px]">
