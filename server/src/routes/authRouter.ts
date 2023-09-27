@@ -6,6 +6,7 @@ import { facebookbAuth } from '../controllers/auth/facebook';
 import { refresh } from '../controllers/auth/refresh';
 import { login } from '../middlewares/login';
 import { oAuthCallback } from '../middlewares/oAuthCallback';
+import { logout } from '../controllers/auth/logout';
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.get('/google/callback', verifyCsrfToken, oAuthCallback, login);
 router.get('/facebook', facebookbAuth);
 router.get('/facebook/callback', verifyCsrfToken, oAuthCallback, login);
 router.get('/refresh', refresh);
+router.get('/refresh/logout', logout);
 
 export { router as authRouter };
