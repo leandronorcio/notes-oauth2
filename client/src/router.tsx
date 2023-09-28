@@ -1,13 +1,13 @@
 import { RouterProvider } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
-import { Login } from './routes/Login';
-import { Register } from './routes/Register';
-import { Notes, notesLoader } from './routes/Notes';
-import { NoteDetail, noteDetailLoader } from './routes/NoteDetail';
-import { ProtectedRoutes } from './components/ProtectedRoutes';
-import { AuthRoutes } from './components/AuthRoutes';
+import { Login } from './routes/login';
+import { Register } from './routes/register';
+import { Notes, notesLoader } from './routes/notes';
+import { NoteDetail, noteDetailLoader } from './routes/note-detail';
+import { ProtectedRoutes } from './components/protected-routes';
+import { AuthRoutes } from './components/auth-routes';
 import { useSession } from './hooks/useSession';
-import { NoteEdit } from './routes/NoteEdit';
+import { NoteEdit } from './routes/note-edit';
 
 export const Paths = {
   root: '/',

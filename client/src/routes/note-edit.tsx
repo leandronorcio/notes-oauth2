@@ -1,6 +1,6 @@
-import { Container } from '@/components/Container';
+import { Container } from '@/components/container';
 import { useLoaderData } from 'react-router-dom';
-import { noteDetailLoader } from './NoteDetail';
+import { noteDetailLoader } from './note-detail';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';

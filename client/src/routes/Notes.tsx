@@ -5,8 +5,8 @@ import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { ProfileBar } from '@/components/ProfileBar';
-import { CreateNote } from '@/components/CreateNote';
+import { ProfileBar } from '@/components/profile-bar';
+import { CreateNote } from '@/components/create-note';
 import { readNotes } from '@/lib/notesApi';
 
 export async function notesLoader({
