@@ -1,17 +1,15 @@
 import { Button } from '@/components/ui/button';
-import { useNotesApi } from '@/hooks/useNotesApi';
+import { useSession } from '@/hooks/useSession';
+import { createNote } from '@/lib/notesApi';
 import { FilePlus } from 'lucide-react';
 
 export function CreateNote() {
-  const { create } = useNotesApi();
+  const { accessToken } = useSession();
 
   return (
     <Button
       className="flex gap-2 w-full"
-      onClick={() => {
-        create();
-        console.log('clicked');
-      }}
+      onClick={() => createNote({ accessToken: accessToken! })}
     >
       <FilePlus /> Create note
     </Button>

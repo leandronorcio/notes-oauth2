@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './globals.css';
-import App from './App';
+import { ThemeProvider } from './components/theme-provider';
 import { AuthProvider } from './contexts/AuthProvider';
+import { Router } from './router';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
