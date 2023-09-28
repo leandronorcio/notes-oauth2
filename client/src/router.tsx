@@ -3,12 +3,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Login } from './routes/Login';
 import { Register } from './routes/Register';
 import { Notes, notesLoader } from './routes/Notes';
-import { NoteDetail } from './routes/NoteDetail';
+import { NoteDetail, noteDetailLoader } from './routes/NoteDetail';
 import { ProtectedRoutes } from './components/ProtectedRoutes';
 import { AuthRoutes } from './components/AuthRoutes';
 import { useSession } from './hooks/useSession';
 
-const Paths = {
+export const Paths = {
   root: '/',
   notes: '/notes',
   noteDetail: '/notes/:noteId',
@@ -16,7 +16,7 @@ const Paths = {
   noteDelete: '/notes/:noteId/delete',
   login: '/login',
   register: '/register',
-};
+} as const;
 
 export function Router() {
   const { accessToken } = useSession();
@@ -50,6 +50,8 @@ export function Router() {
               children: [
                 {
                   path: Paths.noteDetail,
+                  loader: (params) =>
+                    noteDetailLoader({ ...params, accessToken }),
                   element: <NoteDetail />,
                 },
                 {

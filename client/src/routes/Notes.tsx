@@ -15,8 +15,7 @@ export async function notesLoader({
   accessToken: string | null;
 }) {
   if (!accessToken) return null;
-  const notes = await readNotes({ accessToken });
-  return notes;
+  return await readNotes({ accessToken });
 }
 
 export function Notes() {

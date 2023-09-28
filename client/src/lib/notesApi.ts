@@ -43,7 +43,10 @@ export async function readNote({
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  if (!res.ok) return alert('Error fetching notes.');
+  if (!res.ok) {
+    alert('Error fetching note.');
+    return null;
+  }
 
   return (await res.json()) as Note;
 }
