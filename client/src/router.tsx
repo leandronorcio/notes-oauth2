@@ -7,6 +7,7 @@ import { NoteDetail, noteDetailLoader } from './routes/NoteDetail';
 import { ProtectedRoutes } from './components/ProtectedRoutes';
 import { AuthRoutes } from './components/AuthRoutes';
 import { useSession } from './hooks/useSession';
+import { NoteEdit } from './routes/NoteEdit';
 
 export const Paths = {
   root: '/',
@@ -53,9 +54,13 @@ export function Router() {
                   loader: (params) =>
                     noteDetailLoader({ ...params, accessToken }),
                   element: <NoteDetail />,
+                  errorElement: <div>not found</div>,
                 },
                 {
                   path: Paths.noteEdit,
+                  loader: (params) =>
+                    noteDetailLoader({ ...params, accessToken }),
+                  element: <NoteEdit />,
                 },
                 {
                   path: Paths.noteDelete,
