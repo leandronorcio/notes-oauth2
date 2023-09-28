@@ -17,18 +17,24 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { ChevronsUpDown, LogOut } from 'lucide-react';
+import { useSession } from '@/hooks/useSession';
+import { getAvatarFallback } from '@/lib/getAvatarFallback';
 
 export function ProfileBar() {
+  const { logout, user } = useSession();
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="w-full">
         <div className="flex  items-center hover:bg-accent p-3 rounded-full justify-between">
           <div className="flex gap-4 items-center">
             <Avatar>
-              <AvatarImage src="https://avatars.githubusercontent.com/u/32889996?s=400&v=4" />
-              <AvatarFallback>LN</AvatarFallback>
+              <AvatarImage src={user?.avatar!} />
+              <AvatarFallback>
+                {user?.name ? getAvatarFallback(user.name) : null}
+              </AvatarFallback>
             </Avatar>
-            <h3 className="text-lg font-semibold">Leandro Norcio</h3>
+            <h3 className="text-lg font-semibold">{user?.name}</h3>
           </div>
           <ChevronsUpDown className="block" />
         </div>
@@ -49,7 +55,7 @@ export function ProfileBar() {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Continue</AlertDialogAction>
+              <AlertDialogAction onClick={logout}>Continue</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
