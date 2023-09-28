@@ -3,6 +3,8 @@ import { Login } from './routes/Login';
 import { Register } from './routes/Register';
 import { Notes } from './routes/Notes';
 import { NoteDetail } from './routes/NoteDetail';
+import { ProtectedRoutes } from './components/ProtectedRoutes';
+import { AuthRoutes } from './components/AuthRoutes';
 
 const Paths = {
   root: '/',
@@ -19,27 +21,37 @@ export const router = createBrowserRouter([
     path: Paths.root,
   },
   {
-    path: Paths.notes,
-    element: <Notes />,
+    element: <AuthRoutes />,
     children: [
       {
-        path: Paths.noteDetail,
-        element: <NoteDetail />,
+        path: Paths.login,
+        element: <Login />,
       },
       {
-        path: Paths.noteEdit,
-      },
-      {
-        path: Paths.noteDelete,
+        path: Paths.register,
+        element: <Register />,
       },
     ],
   },
   {
-    path: Paths.login,
-    element: <Login />,
-  },
-  {
-    path: Paths.register,
-    element: <Register />,
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: Paths.notes,
+        element: <Notes />,
+        children: [
+          {
+            path: Paths.noteDetail,
+            element: <NoteDetail />,
+          },
+          {
+            path: Paths.noteEdit,
+          },
+          {
+            path: Paths.noteDelete,
+          },
+        ],
+      },
+    ],
   },
 ]);
