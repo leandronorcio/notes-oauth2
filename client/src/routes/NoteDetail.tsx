@@ -1,8 +1,9 @@
+import { Container } from '@/components/Container';
 import { Button } from '@/components/ui/button';
 import { readNote } from '@/lib/notesApi';
 import { cn } from '@/lib/utils';
 import { Paths } from '@/router';
-import { Pencil, Trash, Trash2 } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 import {
   ActionFunctionArgs,
   Params,
@@ -28,7 +29,7 @@ export function NoteDetail() {
   const note = useLoaderData() as Awaited<ReturnType<typeof noteDetailLoader>>;
 
   return (
-    <div className="mx-auto w-full lg:w-[600px] p-3 md:p-5">
+    <Container>
       <div className="flex gap-3 justify-end">
         <Button variant="secondary">
           <Pencil className="mr-2" size={20} /> Edit
@@ -49,6 +50,6 @@ export function NoteDetail() {
       >
         {note?.content || 'No content.'}
       </p>
-    </div>
+    </Container>
   );
 }
