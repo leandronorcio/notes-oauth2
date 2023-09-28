@@ -7,10 +7,7 @@ export async function createNote({ accessToken }: { accessToken: string }) {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  if (!res.ok) {
-    alert('Error creating note.');
-    return null;
-  }
+  if (!res.ok) throw Error('Error creating note.');
 
   return (await res.json()) as { id: number };
 }
@@ -22,10 +19,7 @@ export async function readNotes({ accessToken }: { accessToken: string }) {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  if (!res.ok) {
-    alert('Error fetching notes.');
-    return null;
-  }
+  if (!res.ok) throw Error('Error fetching notes.');
 
   return (await res.json()) as Note[];
 }
@@ -43,10 +37,7 @@ export async function readNote({
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  if (!res.ok) {
-    alert('Error fetching note.');
-    return null;
-  }
+  if (!res.ok) throw Error('Error fetching note.');
 
   return (await res.json()) as Note;
 }
