@@ -2,6 +2,8 @@ import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { Facebook, Github, Google } from './ui/svg-icons';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: 'login' | 'register';
@@ -12,6 +14,12 @@ export function LoginForm({
   type = 'login',
   ...props
 }: LoginFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const login = (url: string) => {
+    setIsLoading(true);
+    window.location.href = url;
+  };
+
   return (
     <div
       className={cn(
@@ -40,8 +48,9 @@ export function LoginForm({
       <Button
         variant="outline"
         type="button"
-        // disabled={isLoading}
         className="flex gap-2"
+        onClick={() => login(import.meta.env.VITE_GITHUB_AUTH)}
+        disabled={isLoading}
       >
         <Github />
         Github
@@ -49,19 +58,29 @@ export function LoginForm({
       <Button
         variant="outline"
         type="button"
-        // disabled={isLoading}
-        className="flex gap-2"
-      >
-        <Facebook /> Facebook
-      </Button>
-      <Button
-        variant="outline"
-        type="button"
-        // disabled={isLoading}
+        disabled={isLoading}
+        onClick={() => login(import.meta.env.VITE_GOOGLE_AUTH)}
         className="flex gap-2"
       >
         <Google /> Google
       </Button>
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isLoading}
+        onClick={() => login(import.meta.env.VITE_FACEBOOK_AUTH)}
+        className="flex gap-2"
+      >
+        <Facebook />
+        Facebook
+      </Button>
+
+      {isLoading && (
+        <div className="flex mt-2 gap-4 text-muted-foreground justify-center">
+          <Loader2 className="animate-spin" />
+          Loading, please wait
+        </div>
+      )}
 
       <p className="text-center text-sm text-muted-foreground underline underline-offset-4 mt-3">
         <Link to={type === 'login' ? '/register' : '/login'}>
