@@ -15,7 +15,7 @@ export const refresh: RequestHandler = async (req, res) => {
     const accessToken = jwt.sign(
       { sub: user.id, name: user.name },
       process.env.JWT_SECRET as string,
-      { expiresIn: '15m' }
+      { expiresIn: '2h' } // TODO: Decrease this in production
     );
     res.send({ accessToken, user });
   } catch (error) {
