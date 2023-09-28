@@ -16,7 +16,8 @@ const sessionDefaultValue: Session = {
 
 export const AuthContext = createContext<{
   session: Session;
-}>({ session: sessionDefaultValue });
+  setSession: React.Dispatch<React.SetStateAction<Session>>;
+}>({ session: sessionDefaultValue, setSession: () => {} });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session>(sessionDefaultValue);
@@ -51,6 +52,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ session }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ session, setSession }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
