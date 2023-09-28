@@ -1,0 +1,32 @@
+@ACCESS_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJTb25nIE5vIiwiaWF0IjoxNjk1OTEyNjAyLCJleHAiOjE2OTU5MTk4MDJ9.EYg4hHdD-ozFp5xIRdEKfAd6I985S1FYdxLPLoZCux8
+@PORT = 4000
+
+### Create a note
+POST http://localhost:{{PORT}}/notes
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+
+### Read all notes
+GET http://localhost:{{PORT}}/notes
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+
+### Read a singe note
+GET http://localhost:{{PORT}}/notes/5
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+
+### Update a note
+PUT http://localhost:{{PORT}}/notes/5
+Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+{
+  "title": "Play",
+  "content": "From a place beyond time, and time beyond counting."
+}
+
+
+### Delete a note
+DELETE http://localhost:{{PORT}}/notes/5
+Authorization: Bearer {{ACCESS_TOKEN}}
