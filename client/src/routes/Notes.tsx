@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FilePlus, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ProfileBar } from '@/components/ProfileBar';
+import { CreateNote } from '@/components/CreateNote';
 
 export function Notes() {
   // This state is only used for screens smaller than `sm`
@@ -56,9 +57,7 @@ export function Notes() {
           )}
         >
           <div className="p-2 w-full">
-            <Button className="flex gap-2 w-full">
-              <FilePlus /> Create note
-            </Button>
+            <CreateNote />
           </div>
           <Separator />
           <div className="flex-1 py-2 overflow-y-auto px-2">
