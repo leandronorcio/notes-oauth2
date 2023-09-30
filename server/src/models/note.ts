@@ -10,7 +10,7 @@ class NoteModel {
   }
 
   async listAll(userId: number) {
-    const query = 'SELECT * FROM "Note" WHERE "userId" = $1';
+    const query = 'SELECT * FROM "Note" WHERE "userId" = $1 ORDER BY "id" DESC';
     const values = [userId];
 
     const res = await db.query(query, values);
