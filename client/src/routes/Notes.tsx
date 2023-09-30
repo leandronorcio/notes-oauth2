@@ -1,7 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Menu, X } from 'lucide-react';
-import { NavLink, Outlet, redirect, useLoaderData } from 'react-router-dom';
+import { Loader2, Menu, X } from 'lucide-react';
+import {
+  NavLink,
+  Outlet,
+  redirect,
+  useLoaderData,
+  useNavigation,
+} from 'react-router-dom';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -33,6 +39,7 @@ export function Notes() {
   // This state is only used for screens smaller than `sm`
   const [sidebarShown, setSidebarShown] = useState(false);
   const toggleSidebar = () => setSidebarShown((prev) => !prev);
+  const { state } = useNavigation();
 
   return (
     <div className="h-screen flex flex-col">
@@ -73,12 +80,28 @@ export function Notes() {
                     <li key={id}>
                       <NavLink
                         to={`${id}`}
-                        className="block rounded-lg py-2 px-4 border-border hover:bg-accent border-[1px] cursor-pointer truncate"
+                        className={({ isActive }) =>
+                          cn(
+                            'block rounded-lg py-2 px-4 border-border hover:bg-accent border-[1px] cursor-pointer truncate',
+                            isActive && 'bg-secondary'
+                          )
+                        }
                       >
-                        {title || (
-                          <span className="text-muted-foreground italic">
-                            Untitled Note
-                          </span>
+                        {({ isPending }) => (
+                          <>
+                            {isPending ? (
+                              <div className="flex gap-2">
+                                <Loader2 className="animate-spin" /> Loading
+                                note
+                              </div>
+                            ) : (
+                              title || (
+                                <span className="text-muted-foreground italic">
+                                  Untitled Note
+                                </span>
+                              )
+                            )}
+                          </>
                         )}
                       </NavLink>
                     </li>
@@ -91,7 +114,12 @@ export function Notes() {
             <ProfileBar />
           </div>
         </div>
-        <div className="h-full flex-1 sm:ml-[300px]">
+        <div
+          className={cn(
+            'h-full flex-1 sm:ml-[300px]',
+            state === 'loading' && 'opacity-60'
+          )}
+        >
           <Outlet />
         </div>
       </div>
