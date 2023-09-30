@@ -5,7 +5,8 @@ import { Form, useNavigation } from 'react-router-dom';
 // This component is rendered on the `/notes` route, so it uses that route's `action` function
 export function CreateNote() {
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
+  const isSubmitting =
+    navigation.formAction === '/notes' && navigation.state === 'submitting';
 
   return (
     <Form method="POST">
