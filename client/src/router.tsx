@@ -7,7 +7,7 @@ import { NoteDetail, noteDetailLoader } from './routes/note-detail';
 import { ProtectedRoutes } from './components/protected-routes';
 import { AuthRoutes } from './components/auth-routes';
 import { useSession } from './hooks/useSession';
-import { NoteEdit } from './routes/note-edit';
+import { NoteEdit, editNoteAction } from './routes/note-edit';
 
 export const Paths = {
   root: '/',
@@ -59,6 +59,8 @@ export function Router() {
                 },
                 {
                   path: Paths.noteEdit,
+                  action: ({ params, request }) =>
+                    editNoteAction({ params, request, accessToken }),
                   loader: (params) =>
                     noteDetailLoader({ ...params, accessToken }),
                   element: <NoteEdit />,
