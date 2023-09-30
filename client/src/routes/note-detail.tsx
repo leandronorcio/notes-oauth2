@@ -9,6 +9,7 @@ import {
   Params,
   ParamParseKey,
   useLoaderData,
+  useNavigate,
 } from 'react-router-dom';
 
 interface NoteDetailLoaderArgs extends ActionFunctionArgs {
@@ -27,11 +28,12 @@ export async function noteDetailLoader({
 
 export function NoteDetail() {
   const note = useLoaderData() as Awaited<ReturnType<typeof noteDetailLoader>>;
+  const navigate = useNavigate();
 
   return (
     <Container>
       <div className="flex gap-3 justify-end">
-        <Button variant="secondary">
+        <Button variant="secondary" onClick={() => navigate('edit')}>
           <Pencil className="mr-2" size={20} /> Edit
         </Button>
         <Button variant="destructive">
