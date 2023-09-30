@@ -2,7 +2,7 @@ import { RouterProvider } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import { Login } from './routes/login';
 import { Register } from './routes/register';
-import { Notes, notesLoader } from './routes/notes';
+import { Notes, createNoteAction, notesLoader } from './routes/notes';
 import { NoteDetail, noteDetailLoader } from './routes/note-detail';
 import { ProtectedRoutes } from './components/protected-routes';
 import { AuthRoutes } from './components/auth-routes';
@@ -47,6 +47,7 @@ export function Router() {
             {
               path: Paths.notes,
               element: <Notes />,
+              action: () => createNoteAction({ accessToken }),
               loader: () => notesLoader({ accessToken }),
               children: [
                 {

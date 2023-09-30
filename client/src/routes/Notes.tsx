@@ -1,13 +1,23 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Menu, X } from 'lucide-react';
-import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
+import { NavLink, Outlet, redirect, useLoaderData } from 'react-router-dom';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ProfileBar } from '@/components/profile-bar';
 import { CreateNote } from '@/components/create-note';
-import { readNotes } from '@/lib/notesApi';
+import { createNote, readNotes } from '@/lib/notesApi';
+
+export async function createNoteAction({
+  accessToken,
+}: {
+  accessToken: string | null;
+}) {
+  if (!accessToken) return null;
+  const { id } = await createNote({ accessToken });
+  return redirect(`/notes/${id}/edit`);
+}
 
 export async function notesLoader({
   accessToken,

@@ -1,17 +1,29 @@
 import { Button } from '@/components/ui/button';
-import { useSession } from '@/hooks/useSession';
-import { createNote } from '@/lib/notesApi';
-import { FilePlus } from 'lucide-react';
+import { FilePlus, Loader2 } from 'lucide-react';
+import { Form, useNavigation } from 'react-router-dom';
 
+// This component is rendered on the `/notes` route, so it uses that route's `action` function
 export function CreateNote() {
-  const { accessToken } = useSession();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
 
   return (
-    <Button
-      className="flex gap-2 w-full"
-      onClick={() => createNote({ accessToken: accessToken! })}
-    >
-      <FilePlus /> Create note
-    </Button>
+    <Form method="POST">
+      <Button
+        className="flex gap-2 w-full"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <Loader2 className="animate-spin" /> Creating note...
+          </>
+        ) : (
+          <>
+            <FilePlus /> Create Note
+          </>
+        )}
+      </Button>
+    </Form>
   );
 }
