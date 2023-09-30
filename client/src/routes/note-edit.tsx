@@ -1,5 +1,5 @@
 import { Container } from '@/components/container';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { noteDetailLoader } from './note-detail';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 export function NoteEdit() {
   // Use the same `loader` function of the `/note/:noteId` route
   const note = useLoaderData() as Awaited<ReturnType<typeof noteDetailLoader>>;
+  const navigate = useNavigate();
 
   return (
     <Container className="flex flex-col gap-3">
@@ -29,7 +30,15 @@ export function NoteEdit() {
         />
       </div>
       <div className="flex justify-end gap-3">
-        <Button variant="secondary">Cancel</Button>
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Cancel
+        </Button>
         <Button>Save</Button>
       </div>
     </Container>
