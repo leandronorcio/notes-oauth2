@@ -3,6 +3,17 @@ import { Button } from '@/components/ui/button';
 import { readNote } from '@/lib/notesApi';
 import { cn } from '@/lib/utils';
 import { Paths } from '@/router';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Pencil, Trash2 } from 'lucide-react';
 import {
   ActionFunctionArgs,
@@ -36,20 +47,32 @@ export function NoteDetail() {
         <Button variant="secondary" onClick={() => navigate('edit')}>
           <Pencil className="mr-2" size={20} /> Edit
         </Button>
-        <Form
-          method="POST"
-          action="delete"
-          onSubmit={(event) => {
-            if (!confirm('Please confirm you want to delete this record.')) {
-              event.preventDefault();
-            }
-          }}
-        >
-          <Button type="submit" variant="destructive">
-            <Trash2 className="mr-2" size={20} />
-            Delete
-          </Button>
-        </Form>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button type="submit" variant="destructive">
+              <Trash2 className="mr-2" size={20} />
+              Delete
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+              <AlertDialogDescription>
+                Do you really wish to delete this note?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <Form method="POST" action="delete">
+                <AlertDialogAction asChild>
+                  <Button type="submit" variant="destructive">
+                    Delete
+                  </Button>
+                </AlertDialogAction>
+              </Form>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
       <h1 className="text-4xl font-semibold mb-4">
         {note?.title || 'Untitled note'}
