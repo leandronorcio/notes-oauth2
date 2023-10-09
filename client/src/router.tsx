@@ -10,6 +10,7 @@ import { useSession } from './hooks/useSession';
 import { NoteEdit, editNoteAction } from './routes/note-edit';
 import { deleteNoteAction } from './routes/note-delete';
 import { Index } from './routes/note-index';
+import { ErrorPage } from './components/error';
 
 export const Paths = {
   root: '/',
@@ -54,42 +55,46 @@ export function Router() {
               action: () => createNoteAction({ accessToken: accessToken! }),
               loader: () => notesLoader({ accessToken: accessToken! }),
               children: [
-                { index: true, element: <Index /> },
                 {
-                  path: Paths.noteDetail,
-                  loader: ({ params, request }) =>
-                    noteDetailLoader({
-                      accessToken: accessToken!,
-                      params,
-                      request,
-                    }),
-                  element: <NoteDetail />,
-                  errorElement: <div>not found</div>,
-                },
-                {
-                  path: Paths.noteEdit,
-                  action: ({ params, request }) =>
-                    editNoteAction({
-                      accessToken: accessToken!,
-                      params,
-                      request,
-                    }),
-                  loader: ({ params, request }) =>
-                    noteDetailLoader({
-                      accessToken: accessToken!,
-                      params,
-                      request,
-                    }),
-                  element: <NoteEdit />,
-                },
-                {
-                  path: Paths.noteDelete,
-                  action: ({ params, request }) =>
-                    deleteNoteAction({
-                      accessToken: accessToken!,
-                      params,
-                      request,
-                    }),
+                  errorElement: <ErrorPage />,
+                  children: [
+                    { index: true, element: <Index /> },
+                    {
+                      path: Paths.noteDetail,
+                      loader: ({ params, request }) =>
+                        noteDetailLoader({
+                          accessToken: accessToken!,
+                          params,
+                          request,
+                        }),
+                      element: <NoteDetail />,
+                    },
+                    {
+                      path: Paths.noteEdit,
+                      action: ({ params, request }) =>
+                        editNoteAction({
+                          accessToken: accessToken!,
+                          params,
+                          request,
+                        }),
+                      loader: ({ params, request }) =>
+                        noteDetailLoader({
+                          accessToken: accessToken!,
+                          params,
+                          request,
+                        }),
+                      element: <NoteEdit />,
+                    },
+                    {
+                      path: Paths.noteDelete,
+                      action: ({ params, request }) =>
+                        deleteNoteAction({
+                          accessToken: accessToken!,
+                          params,
+                          request,
+                        }),
+                    },
+                  ],
                 },
               ],
             },

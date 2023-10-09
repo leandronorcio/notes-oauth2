@@ -44,7 +44,10 @@ export async function readNote({
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  if (!res.ok) throw Error('Error fetching note.');
+  if (!res.ok) {
+    if (res.status === 404) throw Error('This note does not exist');
+    throw Error('Error fetching note.');
+  }
 
   return (await res.json()) as Note;
 }
@@ -90,7 +93,7 @@ export async function deleteNote({
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  if (!res.ok) throw Error('Error updating note.');
+  if (!res.ok) throw Error('Error deleting note.');
 
   return (await res.json()) as { id: number };
 }
