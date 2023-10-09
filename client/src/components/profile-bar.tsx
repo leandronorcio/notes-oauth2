@@ -29,7 +29,7 @@ export function ProfileBar() {
         <div className="flex  items-center hover:bg-accent p-3 rounded-full justify-between">
           <div className="flex gap-4 items-center">
             <Avatar>
-              <AvatarImage src={user?.avatar!} />
+              <AvatarImage src={user?.avatar!} referrerPolicy="no-referrer" />
               <AvatarFallback>
                 {user?.name ? getAvatarFallback(user.name) : null}
               </AvatarFallback>
