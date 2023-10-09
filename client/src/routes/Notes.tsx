@@ -18,13 +18,19 @@ import { createNote, readNotes } from '@/lib/notesApi';
 export async function createNoteAction({
   accessToken,
 }: {
-  accessToken: string;
+  accessToken: string | null;
 }) {
+  if (!accessToken) throw Error('You are not authenticated.');
   const { id } = await createNote({ accessToken });
   return redirect(`/notes/${id}/edit`);
 }
 
-export async function notesLoader({ accessToken }: { accessToken: string }) {
+export async function notesLoader({
+  accessToken,
+}: {
+  accessToken: string | null;
+}) {
+  if (!accessToken) return null;
   return await readNotes({ accessToken });
 }
 

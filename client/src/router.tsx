@@ -47,13 +47,11 @@ export function Router() {
         {
           element: <ProtectedRoutes />,
           children: [
-            // The `accessToken` is guaranteed to be non-null for these routes as they are
-            // wrapped in <ProtectedRoutes>, so we can safely use non-null assertion here.
             {
               path: Paths.notes,
               element: <Notes />,
-              action: () => createNoteAction({ accessToken: accessToken! }),
-              loader: () => notesLoader({ accessToken: accessToken! }),
+              action: () => createNoteAction({ accessToken }),
+              loader: () => notesLoader({ accessToken }),
               children: [
                 {
                   errorElement: <ErrorPage />,
@@ -63,7 +61,7 @@ export function Router() {
                       path: Paths.noteDetail,
                       loader: ({ params, request }) =>
                         noteDetailLoader({
-                          accessToken: accessToken!,
+                          accessToken,
                           params,
                           request,
                         }),
@@ -73,13 +71,13 @@ export function Router() {
                       path: Paths.noteEdit,
                       action: ({ params, request }) =>
                         editNoteAction({
-                          accessToken: accessToken!,
+                          accessToken,
                           params,
                           request,
                         }),
                       loader: ({ params, request }) =>
                         noteDetailLoader({
-                          accessToken: accessToken!,
+                          accessToken,
                           params,
                           request,
                         }),
@@ -89,7 +87,7 @@ export function Router() {
                       path: Paths.noteDelete,
                       action: ({ params, request }) =>
                         deleteNoteAction({
-                          accessToken: accessToken!,
+                          accessToken,
                           params,
                           request,
                         }),
