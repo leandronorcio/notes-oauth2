@@ -19,7 +19,6 @@ export async function createNote({ accessToken }: { accessToken: string }) {
 
 // For reading all notes
 export async function readNotes({ accessToken }: { accessToken: string }) {
-  await delay();
   const res = await fetch(`${import.meta.env.VITE_API_URL}/notes`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
