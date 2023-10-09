@@ -20,7 +20,7 @@ import { Paths } from '@/router';
 
 interface EditNoteActionArgs extends ActionFunctionArgs {
   params: Params<ParamParseKey<typeof Paths.noteDetail>>;
-  accessToken: string | null;
+  accessToken: string;
 }
 
 export async function editNoteAction({
@@ -28,8 +28,6 @@ export async function editNoteAction({
   params,
   request,
 }: EditNoteActionArgs) {
-  if (!accessToken) return null;
-
   const formData = await request.formData();
   const { id } = await updateNote({
     accessToken,

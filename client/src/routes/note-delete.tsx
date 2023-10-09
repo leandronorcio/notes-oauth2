@@ -9,15 +9,13 @@ import {
 
 interface DeleteNoteActionArgs extends ActionFunctionArgs {
   params: Params<ParamParseKey<typeof Paths.noteDetail>>;
-  accessToken: string | null;
+  accessToken: string;
 }
 
 export async function deleteNoteAction({
   accessToken,
   params,
 }: DeleteNoteActionArgs) {
-  if (!accessToken) return null;
-
   await deleteNote({
     accessToken,
     id: parseInt(params.noteId!),

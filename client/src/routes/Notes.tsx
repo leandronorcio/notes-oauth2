@@ -18,19 +18,13 @@ import { createNote, readNotes } from '@/lib/notesApi';
 export async function createNoteAction({
   accessToken,
 }: {
-  accessToken: string | null;
+  accessToken: string;
 }) {
-  if (!accessToken) return null;
   const { id } = await createNote({ accessToken });
   return redirect(`/notes/${id}/edit`);
 }
 
-export async function notesLoader({
-  accessToken,
-}: {
-  accessToken: string | null;
-}) {
-  if (!accessToken) return null;
+export async function notesLoader({ accessToken }: { accessToken: string }) {
   return await readNotes({ accessToken });
 }
 

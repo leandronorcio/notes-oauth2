@@ -46,32 +46,50 @@ export function Router() {
         {
           element: <ProtectedRoutes />,
           children: [
+            // The `accessToken` is guaranteed to be non-null for these routes as they are
+            // wrapped in <ProtectedRoutes>, so we can safely use non-null assertion here.
             {
               path: Paths.notes,
               element: <Notes />,
-              action: () => createNoteAction({ accessToken }),
-              loader: () => notesLoader({ accessToken }),
+              action: () => createNoteAction({ accessToken: accessToken! }),
+              loader: () => notesLoader({ accessToken: accessToken! }),
               children: [
                 { index: true, element: <Index /> },
                 {
                   path: Paths.noteDetail,
                   loader: ({ params, request }) =>
-                    noteDetailLoader({ params, accessToken, request }),
+                    noteDetailLoader({
+                      accessToken: accessToken!,
+                      params,
+                      request,
+                    }),
                   element: <NoteDetail />,
                   errorElement: <div>not found</div>,
                 },
                 {
                   path: Paths.noteEdit,
                   action: ({ params, request }) =>
-                    editNoteAction({ params, accessToken, request }),
+                    editNoteAction({
+                      accessToken: accessToken!,
+                      params,
+                      request,
+                    }),
                   loader: ({ params, request }) =>
-                    noteDetailLoader({ params, accessToken, request }),
+                    noteDetailLoader({
+                      accessToken: accessToken!,
+                      params,
+                      request,
+                    }),
                   element: <NoteEdit />,
                 },
                 {
                   path: Paths.noteDelete,
                   action: ({ params, request }) =>
-                    deleteNoteAction({ params, request, accessToken }),
+                    deleteNoteAction({
+                      accessToken: accessToken!,
+                      params,
+                      request,
+                    }),
                 },
               ],
             },

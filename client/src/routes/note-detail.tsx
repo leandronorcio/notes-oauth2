@@ -15,16 +15,14 @@ import {
 
 interface NoteDetailLoaderArgs extends ActionFunctionArgs {
   params: Params<ParamParseKey<typeof Paths.noteDetail>>;
-  accessToken: string | null;
+  accessToken: string;
 }
 
 export async function noteDetailLoader({
   params,
   accessToken,
 }: NoteDetailLoaderArgs) {
-  return accessToken
-    ? await readNote({ id: parseInt(params.noteId!), accessToken })
-    : null;
+  return await readNote({ id: parseInt(params.noteId!), accessToken });
 }
 
 export function NoteDetail() {
