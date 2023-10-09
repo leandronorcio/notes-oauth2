@@ -74,3 +74,23 @@ export async function updateNote({
 
   return (await res.json()) as Note;
 }
+
+// For deleting a note
+export async function deleteNote({
+  accessToken,
+  id,
+}: {
+  accessToken: string;
+  id: number;
+}) {
+  await delay();
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/notes/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!res.ok) throw Error('Error updating note.');
+
+  return (await res.json()) as { id: number };
+}

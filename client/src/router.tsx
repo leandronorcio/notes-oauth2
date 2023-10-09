@@ -8,6 +8,7 @@ import { ProtectedRoutes } from './components/protected-routes';
 import { AuthRoutes } from './components/auth-routes';
 import { useSession } from './hooks/useSession';
 import { NoteEdit, editNoteAction } from './routes/note-edit';
+import { deleteNoteAction } from './routes/note-delete';
 
 export const Paths = {
   root: '/',
@@ -67,6 +68,8 @@ export function Router() {
                 },
                 {
                   path: Paths.noteDelete,
+                  action: ({ params, request }) =>
+                    deleteNoteAction({ params, request, accessToken }),
                 },
               ],
             },

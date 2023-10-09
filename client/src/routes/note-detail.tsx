@@ -10,6 +10,7 @@ import {
   ParamParseKey,
   useLoaderData,
   useNavigate,
+  Form,
 } from 'react-router-dom';
 
 interface NoteDetailLoaderArgs extends ActionFunctionArgs {
@@ -36,10 +37,20 @@ export function NoteDetail() {
         <Button variant="secondary" onClick={() => navigate('edit')}>
           <Pencil className="mr-2" size={20} /> Edit
         </Button>
-        <Button variant="destructive">
-          <Trash2 className="mr-2" size={20} />
-          Delete
-        </Button>
+        <Form
+          method="POST"
+          action="delete"
+          onSubmit={(event) => {
+            if (!confirm('Please confirm you want to delete this record.')) {
+              event.preventDefault();
+            }
+          }}
+        >
+          <Button type="submit" variant="destructive">
+            <Trash2 className="mr-2" size={20} />
+            Delete
+          </Button>
+        </Form>
       </div>
       <h1 className="text-4xl font-semibold mb-4">
         {note?.title || 'Untitled note'}
