@@ -5,7 +5,10 @@ import { verifyJwt } from '../../utils/verifyJwt';
 
 export const refresh: RequestHandler = async (req, res) => {
   const token = req.cookies?.refreshToken;
-  if (!token) return res.sendStatus(401);
+  if (!token)
+    return res
+      .status(401)
+      .json({ error: 'Refresh token does not exist or has expired already.' });
 
   try {
     const decoded = verifyJwt(token);
