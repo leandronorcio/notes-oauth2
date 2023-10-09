@@ -88,20 +88,16 @@ export function Notes() {
                         }
                       >
                         {({ isPending }) => (
-                          <>
-                            {isPending ? (
-                              <div className="flex gap-2">
-                                <Loader2 className="animate-spin" /> Loading
-                                note
-                              </div>
-                            ) : (
-                              title || (
-                                <span className="text-muted-foreground italic">
-                                  Untitled Note
-                                </span>
-                              )
+                          <div
+                            className={cn(
+                              'flex gap-2 justify-between',
+                              isPending && 'opacity-70',
+                              !title && 'text-muted-foreground italic'
                             )}
-                          </>
+                          >
+                            {title || 'Untitled note'}
+                            {isPending && <Loader2 className="animate-spin" />}
+                          </div>
                         )}
                       </NavLink>
                     </li>
