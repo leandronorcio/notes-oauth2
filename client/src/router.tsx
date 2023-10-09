@@ -9,6 +9,7 @@ import { AuthRoutes } from './components/auth-routes';
 import { useSession } from './hooks/useSession';
 import { NoteEdit, editNoteAction } from './routes/note-edit';
 import { deleteNoteAction } from './routes/note-delete';
+import { Index } from './routes/note-index';
 
 export const Paths = {
   root: '/',
@@ -51,6 +52,7 @@ export function Router() {
               action: () => createNoteAction({ accessToken }),
               loader: () => notesLoader({ accessToken }),
               children: [
+                { index: true, element: <Index /> },
                 {
                   path: Paths.noteDetail,
                   loader: (params) =>
