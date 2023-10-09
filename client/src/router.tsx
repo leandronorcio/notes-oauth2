@@ -11,9 +11,10 @@ import { NoteEdit, editNoteAction } from './routes/note-edit';
 import { deleteNoteAction } from './routes/note-delete';
 import { Index } from './routes/note-index';
 import { ErrorPage } from './components/error';
+import { Home } from './routes/home';
 
 export const Paths = {
-  root: '/',
+  home: '/',
   notes: '/notes',
   noteDetail: '/notes/:noteId',
   noteEdit: '/notes/:noteId/edit',
@@ -29,7 +30,8 @@ export function Router() {
     <RouterProvider
       router={createBrowserRouter([
         {
-          path: Paths.root,
+          path: Paths.home,
+          element: <Home />,
         },
         {
           element: <AuthRoutes />,

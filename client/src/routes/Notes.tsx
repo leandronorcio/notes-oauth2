@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { ProfileBar } from '@/components/profile-bar';
 import { CreateNote } from '@/components/create-note';
 import { createNote, readNotes } from '@/lib/notesApi';
+import { LogoWithText } from '@/components/logo-with-text';
 
 export async function createNoteAction({
   accessToken,
@@ -54,7 +55,7 @@ export function Notes() {
           >
             {sidebarShown ? <X /> : <Menu />}
           </Button>
-          <h1 className="text-xl font-semibold p-0 m-0">Notes</h1>
+          <LogoWithText />
         </div>
         <ModeToggle />
       </nav>
