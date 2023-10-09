@@ -55,17 +55,17 @@ export function Router() {
                 { index: true, element: <Index /> },
                 {
                   path: Paths.noteDetail,
-                  loader: (params) =>
-                    noteDetailLoader({ ...params, accessToken }),
+                  loader: ({ params, request }) =>
+                    noteDetailLoader({ params, accessToken, request }),
                   element: <NoteDetail />,
                   errorElement: <div>not found</div>,
                 },
                 {
                   path: Paths.noteEdit,
                   action: ({ params, request }) =>
-                    editNoteAction({ params, request, accessToken }),
-                  loader: (params) =>
-                    noteDetailLoader({ ...params, accessToken }),
+                    editNoteAction({ params, accessToken, request }),
+                  loader: ({ params, request }) =>
+                    noteDetailLoader({ params, accessToken, request }),
                   element: <NoteEdit />,
                 },
                 {
