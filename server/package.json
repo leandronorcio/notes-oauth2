@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf dist && npx tsc",
     "prestart": "npm run build",
-    "start": "node --env-file=config.env dist/index.js",
+    "start": "node --env-file=production.env dist/index.js",
     "predev": "npm run build",
     "dev": "concurrently \"npx tsc -w\" \"nodemon --env-file=config.env dist/index.js\""
   },

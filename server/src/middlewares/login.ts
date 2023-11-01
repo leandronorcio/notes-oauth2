@@ -45,7 +45,5 @@ export const login: RequestHandler = async (req, res) => {
     path: '/auth/refresh',
   });
 
-  console.log('refresh token: ' + refreshToken);
-
-  res.redirect('http://localhost:5173/notes');
+  res.redirect(`${process.env.FRONTEND_URL}/notes`);
 };
