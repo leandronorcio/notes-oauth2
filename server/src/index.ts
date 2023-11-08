@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('Welcome to Notes - OAuth 2.0'));
 app.use('/auth', authRouter);
 app.use('/notes', notesRouter);
 

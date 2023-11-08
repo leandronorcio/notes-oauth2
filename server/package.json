@@ -7,6 +7,7 @@
     "build": "rimraf dist && npx tsc",
     "prestart": "npm run build",
     "start": "node --env-file=production.env dist/index.js",
+    "pm2": "pm2 start pm2.config.cjs",
     "predev": "npm run build",
     "dev": "concurrently \"npx tsc -w\" \"nodemon --env-file=config.env dist/index.js\""
   },
