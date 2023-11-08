@@ -23,6 +23,7 @@ import {
   useNavigate,
   Form,
 } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 interface NoteDetailLoaderArgs extends ActionFunctionArgs {
   params: Params<ParamParseKey<typeof Paths.noteDetail>>;
@@ -42,49 +43,54 @@ export function NoteDetail() {
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <div className="flex gap-3 justify-end">
-        <Button variant="secondary" onClick={() => navigate('edit')}>
-          <Pencil className="mr-2" size={20} /> Edit
-        </Button>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button type="submit" variant="destructive">
-              <Trash2 className="mr-2" size={20} />
-              Delete
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
-              <AlertDialogDescription>
-                Do you really wish to delete this note?
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <Form method="POST" action="delete">
-                <AlertDialogAction asChild>
-                  <Button type="submit" variant="destructive">
-                    Delete
-                  </Button>
-                </AlertDialogAction>
-              </Form>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-      <h1 className="text-4xl font-semibold mb-4">
-        {note?.title || 'Untitled note'}
-      </h1>
-      <p
-        className={cn(
-          'text-lg',
-          !note?.content && 'text-muted-foreground italic'
-        )}
-      >
-        {note?.content || 'No content.'}
-      </p>
-    </Container>
+    <>
+      <Helmet>
+        <title>{note?.title || 'Untitled Note'}</title>
+      </Helmet>
+      <Container>
+        <div className="flex gap-3 justify-end">
+          <Button variant="secondary" onClick={() => navigate('edit')}>
+            <Pencil className="mr-2" size={20} /> Edit
+          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button type="submit" variant="destructive">
+                <Trash2 className="mr-2" size={20} />
+                Delete
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Do you really wish to delete this note?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <Form method="POST" action="delete">
+                  <AlertDialogAction asChild>
+                    <Button type="submit" variant="destructive">
+                      Delete
+                    </Button>
+                  </AlertDialogAction>
+                </Form>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+        <h1 className="text-4xl font-semibold mb-4">
+          {note?.title || 'Untitled note'}
+        </h1>
+        <p
+          className={cn(
+            'text-lg',
+            !note?.content && 'text-muted-foreground italic'
+          )}
+        >
+          {note?.content || 'No content.'}
+        </p>
+      </Container>
+    </>
   );
 }

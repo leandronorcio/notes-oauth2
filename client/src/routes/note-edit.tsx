@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { updateNote } from '@/lib/notesApi';
 import { Paths } from '@/router';
+import { Helmet } from 'react-helmet-async';
 
 interface EditNoteActionArgs extends ActionFunctionArgs {
   params: Params<ParamParseKey<typeof Paths.noteDetail>>;
@@ -54,48 +55,53 @@ export function NoteEdit() {
     formAction === `/notes/${note?.id}/edit` && state === 'submitting';
 
   return (
-    <Form method="POST">
-      <Container className="flex flex-col gap-3">
-        <div>
-          <Label htmlFor="note-title">Title</Label>
-          <Input
-            value={noteValue.title}
-            onChange={(e) =>
-              setNoteValue((prev) => ({ ...prev, title: e.target.value }))
-            }
-            placeholder="Untitled note"
-            id="note-title"
-            name="title"
-          />
-        </div>
-        <div>
-          <Label htmlFor="note-content">Content</Label>
-          <Textarea
-            value={noteValue.content || ''}
-            onChange={(e) =>
-              setNoteValue((prev) => ({ ...prev, content: e.target.value }))
-            }
-            placeholder="No content"
-            id="note-content"
-            name="content"
-          />
-        </div>
+    <>
+      <Helmet>
+        <title>{`Edit ${note?.title || 'Untitled Note'}`}</title>
+      </Helmet>
+      <Form method="POST">
+        <Container className="flex flex-col gap-3">
+          <div>
+            <Label htmlFor="note-title">Title</Label>
+            <Input
+              value={noteValue.title}
+              onChange={(e) =>
+                setNoteValue((prev) => ({ ...prev, title: e.target.value }))
+              }
+              placeholder="Untitled note"
+              id="note-title"
+              name="title"
+            />
+          </div>
+          <div>
+            <Label htmlFor="note-content">Content</Label>
+            <Textarea
+              value={noteValue.content || ''}
+              onChange={(e) =>
+                setNoteValue((prev) => ({ ...prev, content: e.target.value }))
+              }
+              placeholder="No content"
+              id="note-content"
+              name="content"
+            />
+          </div>
 
-        <div className="flex justify-end gap-3">
-          <Button
-            variant="secondary"
-            type="button"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Cancel
-          </Button>
-          <Button disabled={isSubmitting}>
-            {isSubmitting ? 'Saving' : 'Save'}
-          </Button>
-        </div>
-      </Container>
-    </Form>
+          <div className="flex justify-end gap-3">
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button disabled={isSubmitting}>
+              {isSubmitting ? 'Saving' : 'Save'}
+            </Button>
+          </div>
+        </Container>
+      </Form>
+    </>
   );
 }
