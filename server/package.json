@@ -13,7 +13,7 @@
     "prepm2": "npm run build",
     "pm2": "pm2 start npm --name 'notes-api' -- run serve"
   },
-  "author": "",
+  "author": "Leandro Norcio",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
